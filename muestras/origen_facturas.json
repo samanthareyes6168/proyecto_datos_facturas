@@ -1,0 +1,482 @@
+{
+ "lote": "2026-08-03",
+ "generado_por": "gestor_facturas v2",
+ "facturas": [
+  {
+   "folio": "F-000001",
+   "fecha": "2026-08-03",
+   "id_cliente": "374",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 4,
+     "cantidad": 1,
+     "precio_unitario": 450.46
+    }
+   ]
+  },
+  {
+   "folio": "F-000002",
+   "fecha": "2026-08-03",
+   "id_cliente": "298",
+   "id_usuario": 3,
+   "detalle": [
+    {
+     "id_producto": 12,
+     "cantidad": 3,
+     "precio_unitario": 87.0
+    }
+   ]
+  },
+  {
+   "folio": "F-000003",
+   "fecha": "2026-08-03",
+   "id_cliente": "252.0",
+   "id_usuario": 3,
+   "detalle": [
+    {
+     "id_producto": 5,
+     "cantidad": 1,
+     "precio_unitario": 843.47
+    }
+   ]
+  },
+  {
+   "folio": "F-000004",
+   "fecha": "2026-08-03",
+   "id_cliente": "172",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 19,
+     "cantidad": 1,
+     "precio_unitario": 2624.02
+    },
+    {
+     "id_producto": 23,
+     "cantidad": 5,
+     "precio_unitario": 2280.89
+    }
+   ]
+  },
+  {
+   "folio": "F-000005",
+   "fecha": "2026-08-03",
+   "id_cliente": "247",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 20,
+     "cantidad": 1,
+     "precio_unitario": null
+    },
+    {
+     "id_producto": 5,
+     "cantidad": 1,
+     "precio_unitario": 869.34
+    },
+    {
+     "id_producto": 21,
+     "cantidad": 1,
+     "precio_unitario": 155.54
+    }
+   ]
+  },
+  {
+   "folio": "F-000006",
+   "fecha": "2026-08-03",
+   "id_cliente": "350",
+   "id_usuario": 3,
+   "detalle": [
+    {
+     "id_producto": 25,
+     "cantidad": 1,
+     "precio_unitario": 3535.5
+    }
+   ]
+  },
+  {
+   "folio": "F-000007",
+   "fecha": "2026-08-03",
+   "id_cliente": "334",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 4,
+     "cantidad": 2,
+     "precio_unitario": 400.5
+    },
+    {
+     "id_producto": 12,
+     "cantidad": 2,
+     "precio_unitario": 89.37
+    }
+   ]
+  },
+  {
+   "folio": "F-000008",
+   "fecha": "2026-08-03",
+   "id_cliente": "0211",
+   "id_usuario": 1,
+   "detalle": [
+    {
+     "id_producto": 21,
+     "cantidad": 3,
+     "precio_unitario": 143.93
+    },
+    {
+     "id_producto": 15,
+     "cantidad": 1,
+     "precio_unitario": 686.36
+    },
+    {
+     "id_producto": 4,
+     "cantidad": 3,
+     "precio_unitario": 397.9
+    }
+   ]
+  },
+  {
+   "folio": "F-000009",
+   "fecha": "2026-08-03",
+   "id_cliente": "279.0",
+   "id_usuario": 3,
+   "detalle": [
+    {
+     "id_producto": 6,
+     "cantidad": 2,
+     "precio_unitario": 1744.0
+    },
+    {
+     "id_producto": 2,
+     "cantidad": 2,
+     "precio_unitario": 3220.66
+    }
+   ]
+  },
+  {
+   "folio": "F-000010",
+   "fecha": "2026-08-03",
+   "id_cliente": "249",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 17,
+     "cantidad": 10,
+     "precio_unitario": 1968.13
+    },
+    {
+     "id_producto": 25,
+     "cantidad": 3,
+     "precio_unitario": 4226.64
+    },
+    {
+     "id_producto": 21,
+     "cantidad": 1,
+     "precio_unitario": 160.98
+    },
+    {
+     "id_producto": 23,
+     "cantidad": 1,
+     "precio_unitario": 1993.97
+    }
+   ]
+  },
+  {
+   "folio": "F-000011",
+   "fecha": "2026-08-03",
+   "id_cliente": "172",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 13,
+     "cantidad": 1,
+     "precio_unitario": 5338.97
+    },
+    {
+     "id_producto": 3,
+     "cantidad": 1,
+     "precio_unitario": 1207.45
+    }
+   ]
+  },
+  {
+   "folio": "F-000012",
+   "fecha": "2026-08-03",
+   "id_cliente": "0332",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 25,
+     "cantidad": 3,
+     "precio_unitario": 3582.65
+    },
+    {
+     "id_producto": 21,
+     "cantidad": 2,
+     "precio_unitario": 145.75
+    }
+   ]
+  },
+  {
+   "folio": "F-000013",
+   "fecha": "2026-08-03",
+   "id_cliente": "0211",
+   "id_usuario": 1,
+   "detalle": [
+    {
+     "id_producto": 11,
+     "cantidad": 3,
+     "precio_unitario": 62.89
+    },
+    {
+     "id_producto": 19,
+     "cantidad": 3,
+     "precio_unitario": 2961.45
+    }
+   ]
+  },
+  {
+   "folio": "F-000014",
+   "fecha": "2026-08-03",
+   "id_cliente": "123",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 6,
+     "cantidad": 1,
+     "precio_unitario": 1485.22
+    }
+   ]
+  },
+  {
+   "folio": "F-000015",
+   "fecha": "2026-08-03",
+   "id_cliente": "167.0",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 9,
+     "cantidad": 1,
+     "precio_unitario": 1215.11
+    }
+   ]
+  },
+  {
+   "folio": "F-000016",
+   "fecha": "2026-08-03",
+   "id_cliente": "184",
+   "id_usuario": 3,
+   "detalle": [
+    {
+     "id_producto": 23,
+     "cantidad": 3,
+     "precio_unitario": 2070.28
+    }
+   ]
+  },
+  {
+   "folio": "F-000017",
+   "fecha": "2026-08-03",
+   "id_cliente": "209",
+   "id_usuario": 1,
+   "detalle": [
+    {
+     "id_producto": 17,
+     "cantidad": 2,
+     "precio_unitario": 1713.53
+    },
+    {
+     "id_producto": 4,
+     "cantidad": 10,
+     "precio_unitario": 413.47
+    }
+   ]
+  },
+  {
+   "folio": "F-000018",
+   "fecha": "2026-08-03",
+   "id_cliente": "296",
+   "id_usuario": 1,
+   "detalle": [
+    {
+     "id_producto": 12,
+     "cantidad": 5,
+     "precio_unitario": 78.83
+    }
+   ]
+  },
+  {
+   "folio": "F-000019",
+   "fecha": "2026-08-03",
+   "id_cliente": "168",
+   "id_usuario": 3,
+   "detalle": [
+    {
+     "id_producto": 17,
+     "cantidad": 2,
+     "precio_unitario": 1941.92
+    }
+   ]
+  },
+  {
+   "folio": "F-000020",
+   "fecha": "2026-08-03",
+   "id_cliente": "209",
+   "id_usuario": 1,
+   "detalle": [
+    {
+     "id_producto": 20,
+     "cantidad": 2,
+     "precio_unitario": 1018.39
+    },
+    {
+     "id_producto": 4,
+     "cantidad": 1,
+     "precio_unitario": 388.35
+    },
+    {
+     "id_producto": 12,
+     "cantidad": 10,
+     "precio_unitario": 81.85
+    },
+    {
+     "id_producto": 9,
+     "cantidad": 2,
+     "precio_unitario": 1187.04
+    }
+   ]
+  },
+  {
+   "folio": "F-000021",
+   "fecha": "2026-08-03",
+   "id_cliente": " 245 ",
+   "id_usuario": 3,
+   "detalle": [
+    {
+     "id_producto": 22,
+     "cantidad": 5,
+     "precio_unitario": 922.27
+    }
+   ]
+  },
+  {
+   "folio": "F-000022",
+   "fecha": "2026-08-03",
+   "id_cliente": "300",
+   "id_usuario": 1,
+   "detalle": [
+    {
+     "id_producto": 8,
+     "cantidad": 1,
+     "precio_unitario": 3966.96
+    },
+    {
+     "id_producto": 20,
+     "cantidad": 1,
+     "precio_unitario": null
+    },
+    {
+     "id_producto": 12,
+     "cantidad": 5,
+     "precio_unitario": 78.74
+    }
+   ]
+  },
+  {
+   "folio": "F-000023",
+   "fecha": "2026-08-03",
+   "id_cliente": "287",
+   "id_usuario": 1,
+   "detalle": [
+    {
+     "id_producto": 25,
+     "cantidad": 1,
+     "precio_unitario": null
+    },
+    {
+     "id_producto": 7,
+     "cantidad": 1,
+     "precio_unitario": 164.18
+    },
+    {
+     "id_producto": 17,
+     "cantidad": 1,
+     "precio_unitario": 1980.8
+    }
+   ]
+  },
+  {
+   "folio": "F-000024",
+   "fecha": "2026-08-03",
+   "id_cliente": "305",
+   "id_usuario": 3,
+   "detalle": [
+    {
+     "id_producto": 5,
+     "cantidad": 1,
+     "precio_unitario": 856.16
+    },
+    {
+     "id_producto": 7,
+     "cantidad": 10,
+     "precio_unitario": 167.59
+    }
+   ]
+  },
+  {
+   "folio": "F-000025",
+   "fecha": "2026-08-03",
+   "id_cliente": "133",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 8,
+     "cantidad": 1,
+     "precio_unitario": 3944.14
+    },
+    {
+     "id_producto": 15,
+     "cantidad": 2,
+     "precio_unitario": 583.04
+    },
+    {
+     "id_producto": 22,
+     "cantidad": 2,
+     "precio_unitario": 905.41
+    }
+   ]
+  },
+  {
+   "folio": "F-000026",
+   "fecha": "2026-08-03",
+   "id_cliente": "183",
+   "id_usuario": 2,
+   "detalle": [
+    {
+     "id_producto": 24,
+     "cantidad": 1,
+     "precio_unitario": 2387.22
+    },
+    {
+     "id_producto": 9,
+     "cantidad": 2,
+     "precio_unitario": 1154.51
+    }
+   ]
+  },
+  {
+   "folio": "F-000006",
+   "fecha": "2026-08-03",
+   "id_cliente": "319",
+   "id_usuario": 1,
+   "detalle": [
+    {
+     "id_producto": 19,
+     "cantidad": 2,
+     "precio_unitario": 2797.84
+    }
+   ]
+  }
+ ]
+}

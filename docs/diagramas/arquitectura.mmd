@@ -1,0 +1,36 @@
+flowchart LR
+    subgraph F["Fuentes: Gestor de Facturas"]
+        A1[("SQLite de la app<br/>clientes · productos · usuarios<br/>id_cliente INTEGER")]
+        A2["facturas.json<br/>jerárquico · id como texto"]
+        A3["facturas_sucursal.csv<br/>productos en 1 celda (no 1FN)"]
+        A4["clientes_altas.csv"]
+        A5["eventos_pagos.jsonl<br/>tiempo real, desordenado"]
+    end
+    subgraph I["Ingesta"]
+        B1["Vía BATCH<br/>cierre 02:00 · recursos apagados el resto del día"]
+        B2["Vía STREAM<br/>ventanas 1 min · watermark 2 min"]
+    end
+    subgraph AL["Almacén analítico (ELT)"]
+        C1["raw_*<br/>todo como texto, tal cual llegó"]
+        C2{"Escudo de validación<br/>1 esquema · 2 negocio"}
+        C3["stg_*<br/>datos válidos"]
+        C4["int_*<br/>imputación mediana · outliers IQR"]
+        C5["core 3FN<br/>dim_ciudad · dim_cliente · dim_producto<br/>facturas · detalle_factura · pagos"]
+        C6["marts<br/>hechos_ventas · ventas mensuales<br/>por cliente · por producto"]
+        DLQ[["DLQ<br/>registros rechazados + motivo"]]
+    end
+    P[("Apache Parquet<br/>capa histórica columnar")]
+    U["Analistas / reportes / modelos"]
+    A1 --> B1
+    A2 --> B1
+    A3 --> B1
+    A4 --> B1
+    A5 --> B2
+    B1 --> C1
+    B2 --> C2
+    C1 --> C2
+    C2 -- "válido" --> C3
+    C2 -- "inválido o tardío" --> DLQ
+    C3 --> C4 --> C5 --> C6 --> P --> U
+    O["Orquestador (DAG)<br/>dependencias · prioridad por costo · retry 2s/4s/8s"] -.-> I
+    O -.-> AL

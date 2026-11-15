@@ -1,0 +1,41 @@
+erDiagram
+    CLIENTE ||--o{ FACTURA : "recibe"
+    CIUDAD ||--o{ CLIENTE : "es residencia de"
+    USUARIO ||--o{ FACTURA : "emite"
+    FACTURA ||--|{ LINEA_FACTURA : "contiene"
+    PRODUCTO ||--o{ LINEA_FACTURA : "aparece en"
+    FACTURA ||--o{ PAGO : "se liquida con"
+    CLIENTE {
+        identificador id
+        texto nombre
+        texto rfc
+        numero edad
+    }
+    CIUDAD {
+        texto nombre
+        texto estado
+    }
+    PRODUCTO {
+        identificador id
+        texto nombre
+        texto categoria
+        dinero precio_lista
+    }
+    FACTURA {
+        identificador folio
+        fecha fecha_emision
+    }
+    LINEA_FACTURA {
+        numero cantidad
+        dinero precio_unitario
+    }
+    PAGO {
+        identificador evento
+        dinero monto
+        texto metodo
+        fecha_hora momento
+    }
+    USUARIO {
+        identificador id
+        texto usuario
+    }

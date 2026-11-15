@@ -1,0 +1,94 @@
+{
+  "version_esquema": "1.0.0",
+  "version_pipeline": "1.0.0",
+  "generado_en": "2026-11-14T18:01:57",
+  "tablas": {
+    "hechos_ventas": {
+      "filas": 9040,
+      "columnas": [
+        "folio",
+        "linea",
+        "fecha",
+        "anio",
+        "mes",
+        "origen",
+        "id_cliente",
+        "cliente",
+        "ciudad",
+        "estado",
+        "id_producto",
+        "producto",
+        "categoria",
+        "cantidad",
+        "precio_unitario",
+        "importe",
+        "precio_imputado",
+        "es_outlier"
+      ],
+      "bytes": 225655
+    },
+    "mart_ventas_mensuales": {
+      "filas": 4,
+      "columnas": [
+        "anio_mes",
+        "num_facturas",
+        "num_clientes",
+        "ventas_totales",
+        "ticket_promedio"
+      ],
+      "bytes": 4141
+    },
+    "mart_ventas_cliente": {
+      "filas": 418,
+      "columnas": [
+        "id_cliente",
+        "cliente",
+        "ciudad",
+        "estado",
+        "num_facturas",
+        "ventas_totales"
+      ],
+      "bytes": 14483
+    },
+    "mart_ventas_producto": {
+      "filas": 25,
+      "columnas": [
+        "id_producto",
+        "producto",
+        "categoria",
+        "unidades",
+        "ventas_totales",
+        "lineas_con_precio_imputado",
+        "lineas_outlier"
+      ],
+      "bytes": 6441
+    },
+    "stream_cobranza_minuto": {
+      "filas": 32,
+      "columnas": [
+        "ventana_inicio",
+        "ventana_fin",
+        "num_pagos",
+        "monto_total",
+        "eventos_tardios_aceptados",
+        "estado"
+      ],
+      "bytes": 5399
+    },
+    "dlq": {
+      "filas": 428,
+      "columnas": [
+        "id",
+        "fecha_registro",
+        "lote",
+        "fuente",
+        "entidad",
+        "llave",
+        "capa",
+        "motivos",
+        "registro_original"
+      ],
+      "bytes": 36992
+    }
+  }
+}

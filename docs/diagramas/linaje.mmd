@@ -1,0 +1,59 @@
+flowchart LR
+    subgraph O["Origen"]
+        o1["clientes.id_cliente (INT)"]
+        o2["clientes.ciudad / estado"]
+        o3["clientes.edad"]
+        o4["facturas.json · id_cliente (TEXTO)"]
+        o5["facturas.json · detalle[].precio_unitario"]
+        o6["facturas.json · detalle[].cantidad"]
+        o7["sucursal.csv · productos"]
+        o8["productos.categoria"]
+        o9["eventos · monto / event_time"]
+    end
+    subgraph R["raw / stg / int"]
+        r1["raw_clientes_maestro.id_cliente"]
+        r2["stg_facturas.id_cliente<br/>traducir_llave()"]
+        r3["stg_detalle.precio_unitario"]
+        r4["int_detalle.precio_final<br/>mediana por producto"]
+        r5["int_clientes.edad<br/>mediana"]
+        r6["stg_detalle.cantidad"]
+        r7["stg_pagos.monto"]
+    end
+    subgraph C["core 3FN"]
+        c1["dim_cliente.id_cliente"]
+        c2["dim_ciudad.ciudad / estado"]
+        c3["facturas.id_cliente"]
+        c4["detalle_factura.precio_unitario"]
+        c5["detalle_factura.cantidad"]
+        c6["dim_producto.categoria"]
+        c7["pagos.monto"]
+    end
+    subgraph M["Reportes finales"]
+        m1["hechos_ventas.importe"]
+        m2["mart_ventas_mensuales"]
+        m3["mart_ventas_cliente"]
+        m4["mart_ventas_producto"]
+        m5["stream_cobranza_minuto"]
+        p1[("hechos_ventas.parquet")]
+    end
+    o1 --> r1 --> c1
+    o2 --> c2
+    o3 --> r5 --> c1
+    o4 --> r2 --> c3
+    o5 --> r3 --> r4 --> c4
+    o7 --> r3
+    o7 --> r6
+    o6 --> r6 --> c5
+    o8 --> c6
+    o9 --> r7 --> c7
+    o9 --> m5
+    c1 --> m3
+    c2 --> m3
+    c3 --> m1
+    c4 --> m1
+    c5 --> m1
+    c6 --> m4
+    m1 --> m2
+    m1 --> m3
+    m1 --> m4
+    m1 --> p1

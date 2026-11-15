@@ -1,0 +1,45 @@
+# Ejecución programada del pipeline (vía Batch) con GitHub Actions.
+# El "servidor" (runner) solo existe mientras corre el job (~1-2 minutos) y luego se destruye:
+# ese es el argumento FinOps de apagar recursos frente a un servidor encendido 24/7.
+
+name: Pipeline nocturno de facturas
+
+on:
+  schedule:
+    - cron: "0 8 * * *"        # 08:00 UTC = 02:00 hora del centro de México (cierre nocturno)
+  workflow_dispatch:            # botón para correrlo a mano (útil en la demo)
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Generar datos de origen (simulación de la app)
+        run: python -m pipeline.p0_generar_datos --reset
+
+      - name: Correr el DAG (con reintentos)
+        run: python orquestador.py --incluir-costosas
+
+      - name: Chaos Test
+        run: python chaos_test.py
+
+      - name: Guardar resultados (Parquet, DLQ, reportes)
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-pipeline
+          path: |
+            data/parquet/
+            data/dlq/
+            docs/reporte_*.md
+            logs/pipeline.log
+          retention-days: 7
