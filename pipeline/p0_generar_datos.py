@@ -1,17 +1,14 @@
-# p0_generar_datos.py
-# PASO 0 (Sprint 1): genera los datos de origen con "caos controlado".
-#
-# Simula lo que produce el Gestor de Facturas en producción:
-#   1) data/fuente/gestor_facturas.db  -> base RELACIONAL (SQLite) con clientes, productos y usuarios.
-#                                         Aquí id_cliente es INTEGER.
-#   2) data/entrada/batch/AAAA-MM-DD/  -> archivos del cierre nocturno de cada día:
-#        - facturas.json           (JSON jerárquico: cada factura trae su lista "detalle")
-#        - facturas_sucursal.csv   (CSV plano de la sucursal antigua; productos en UNA celda -> viola 1FN)
-#        - clientes_altas.csv      (clientes registrados ese día)
-#      En estos archivos id_cliente llega como TEXTO ("100", " 100 ", "100.0") -> Join roto.
-#   3) data/entrada/stream/eventos_pagos.jsonl -> pagos en tiempo real, algunos llegan tarde.
-#
-# Uso:  python -m pipeline.p0_generar_datos --reset
+"""
+Generación de datos de origen para pruebas.
+
+Simula la operación del Gestor de Facturas con un porcentaje configurable de
+registros corruptos (config.PORCENTAJE_CAOS):
+  - data/fuente/gestor_facturas.db           base relacional (clientes, productos, usuarios)
+  - data/entrada/batch/AAAA-MM-DD/           facturas.json, facturas_sucursal.csv, clientes_altas.csv
+  - data/entrada/stream/eventos_pagos.jsonl  pagos en tiempo real, ordenados por hora de llegada
+
+Ejecución: python -m pipeline.p0_generar_datos --reset
+"""
 
 import argparse
 import csv
@@ -76,7 +73,7 @@ def nuevo_cliente(id_cliente, fecha_ref):
 
 
 def id_como_texto(id_cliente):
-    # La app exporta el id como texto con distintas "formas" (reto del join roto)
+    # Variantes de texto con las que la app exporta el id
     r = random.random()
     if r < 0.75:
         return str(id_cliente)

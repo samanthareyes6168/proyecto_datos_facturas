@@ -1,14 +1,10 @@
-# p1_ingesta_batch.py
-# PASO 1: Ingesta BATCH bajo el paradigma ELT.
-#
-# E (Extract) + L (Load): copiamos los datos TAL CUAL llegan (todo como texto) a tablas raw_*
-# del almacén. La T (Transform) ocurre después, DENTRO del almacén (pasos 3, 4 y 5).
-#
-# Dos tareas:
-#   extraer_maestros()  -> snapshot de la base relacional de la app (clientes, productos, usuarios)
-#   ingestar_lotes()    -> lee cada carpeta AAAA-MM-DD que aún no se haya cargado (idempotente)
-#
-# Uso:  python -m pipeline.p1_ingesta_batch
+"""
+Ingesta batch (ELT: extracción y carga).
+
+Copia los datos sin transformar a tablas raw_* del almacén:
+  - extraer_maestros(): snapshot de clientes, productos y usuarios de la base de la app.
+  - ingestar_lotes(): carga cada lote diario pendiente; control_lotes evita duplicados.
+"""
 
 import csv
 import json
@@ -26,8 +22,7 @@ _intentos_conexion = {"n": 0}
 
 def extraer_maestros():
     """Copia las tablas maestras de la base relacional de la app al almacén (capa raw)."""
-    # Simulación de un fallo temporal de red para demostrar la política Retry del orquestador.
-    # Con SIMULAR_FALLA_RED=2, los dos primeros intentos fallan y el tercero funciona.
+    # SIMULAR_FALLA_RED=N hace fallar los primeros N intentos (prueba de la política de reintentos).
     fallas = int(os.environ.get("SIMULAR_FALLA_RED", "0"))
     _intentos_conexion["n"] += 1
     if _intentos_conexion["n"] <= fallas:

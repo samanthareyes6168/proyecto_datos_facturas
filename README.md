@@ -16,9 +16,9 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate     Mac/Linux: source .venv/bin/activate
 pip install -r requirements.txt
 
-python -m pipeline.p0_generar_datos --reset     # 1. datos de origen con caos controlado
+python -m pipeline.p0_generar_datos --reset     # 1. datos de origen
 python orquestador.py --incluir-costosas         # 2. todo el pipeline + benchmark
-python chaos_test.py                             # 3. la demo del Chaos Test
+python chaos_test.py                             # 3. Chaos Test
 ```
 
 ## Estructura
@@ -38,7 +38,6 @@ python chaos_test.py                             # 3. la demo del Chaos Test
 | `chaos_test.py` | Inyección de caos en vivo |
 | `.github/workflows/pipeline_nocturno.yml` | Ejecución programada a las 02:00 |
 | `docs/` | Modelo conceptual, arquitectura, linaje, catálogo, costos y reportes |
-| `GUIA_PASO_A_PASO.md` | Guía para el equipo: cómo correrlo, qué explicar y guion del video |
 
 ## Mapa contra la rúbrica
 | Requisito | Dónde |

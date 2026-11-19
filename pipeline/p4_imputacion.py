@@ -1,20 +1,13 @@
-# p4_imputacion.py
-# PASO 4: Imputación estadística de nulos en presencia de OUTLIERS.
-#
-# Qué hace:
-#   1) Marca outliers de precio por producto con el método IQR (no se borran, se etiquetan).
-#   2) EXPERIMENTO: oculta el 10 % de los precios conocidos, los "adivina" con 5 métodos
-#      (media global, mediana global, media por producto, mediana por producto, KNN) y mide
-#      el error contra el valor real. Así la elección del método se justifica con números.
-#   3) Aplica el método elegido (mediana por producto) a los precios realmente nulos.
-#   4) Imputa la edad nula de los clientes con la mediana.
-#
-# Por qué la mediana: un solo precio capturado con un cero de más (x10) jala la MEDIA hacia
-# arriba, pero casi no mueve la MEDIANA, porque la mediana solo depende del valor del centro.
-#
-# Salidas: tablas int_detalle e int_clientes, docs/reporte_imputacion.md y docs/img/imputacion_error.png
-#
-# Uso:  python -m pipeline.p4_imputacion
+"""
+Imputación de valores nulos y marcado de outliers.
+
+  - Outliers de precio por producto con el criterio IQR (se marcan, no se eliminan).
+  - Comparación de métodos (media, mediana, por producto y KNN) sobre un 10 % de
+    precios conocidos ocultados.
+  - Imputación de precios con la mediana por producto y de edades con la mediana.
+
+Salidas: int_detalle, int_clientes, docs/reporte_imputacion.md, docs/img/imputacion_error.png
+"""
 
 import numpy as np
 import pandas as pd

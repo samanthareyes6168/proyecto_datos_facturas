@@ -1,20 +1,11 @@
-# p6_parquet.py
-# PASO 6: Optimización analítica con Apache Parquet.
-#
-#   exportar_parquet()  -> escribe la capa histórica limpia (hechos_ventas) y los marts en .parquet
-#                          con la versión del esquema guardada en los metadatos del archivo.
-#   benchmark()         -> compara la MISMA consulta (ventas por categoría y mes) leyendo:
-#                            A) cientos de archivos CSV diarios
-#                            B) un solo archivo Parquet (columnar + comprimido)
-#
-# ¿Por qué Parquet es más rápido?
-#   - Es COLUMNAR: si la consulta usa 4 columnas, solo lee esas 4 (CSV lee todas, fila por fila).
-#   - Es BINARIO y tipado: no hay que convertir texto a número en cada lectura.
-#   - Está COMPRIMIDO (snappy): menos bytes que leer del disco.
-#
-# Requiere:  pip install pyarrow
-# Uso:  python -m pipeline.p6_parquet               (exporta)
-#       python -m pipeline.p6_parquet --benchmark   (exporta y compara contra CSV)
+"""
+Exportación a Apache Parquet y benchmark contra CSV.
+
+  - exportar_parquet(): capa histórica y marts en Parquet, con la versión de esquema en metadatos.
+  - benchmark(): misma consulta (ventas por año, mes y categoría) sobre CSV diarios y sobre Parquet.
+
+Requiere pyarrow. Ejecución: python -m pipeline.p6_parquet [--benchmark] [--factor N]
+"""
 
 import argparse
 import json

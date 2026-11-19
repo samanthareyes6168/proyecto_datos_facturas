@@ -1,7 +1,4 @@
-# crear_muestras.py
-# Copia una muestra pequeña de datos a muestras/ para subirla al repositorio
-# (la entrega pide muestras en CSV, JSON y Parquet). data/ completo NO se sube porque se regenera.
-# Uso:  python crear_muestras.py   (después de correr orquestador.py)
+"""Copia una muestra de datos (CSV, JSON y Parquet) a muestras/ para el repositorio."""
 
 import shutil
 

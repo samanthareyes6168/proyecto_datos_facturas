@@ -1,6 +1,4 @@
-# utilidades.py
-# Funciones que usan todos los pasos: logs, conexión al almacén, DLQ y traducción de llaves.
-
+"""Utilidades comunes: logging, conexión al almacén, DLQ y traducción de llaves."""
 import json
 import logging
 import sqlite3
@@ -11,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import config
 
-# En algunas consolas de Windows los símbolos ✓ ✗ ✅ provocan error de codificación
+# Salida UTF-8 en consolas de Windows
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 except (AttributeError, ValueError):
@@ -79,7 +77,7 @@ def crear_tablas_control(con):
 
 
 def enviar_a_dlq(con, lote, fuente, entidad, llave, capa, motivos, registro_original):
-    """Manda un registro malo a la Dead Letter Queue. El pipeline NO se detiene."""
+    """Registra un registro rechazado en la DLQ."""
     if isinstance(motivos, (list, tuple)):
         motivos = "; ".join(motivos)
     if not isinstance(registro_original, str):
@@ -94,11 +92,8 @@ def enviar_a_dlq(con, lote, fuente, entidad, llave, capa, motivos, registro_orig
 
 def traducir_llave(valor):
     """
-    RETO DEL JOIN ROTO.
-    En la base relacional el id_cliente es INTEGER (100), pero la app lo exporta como
-    texto porque viene de un QLineEdit: "100", " 100 ", "100.0" o "0100".
-    Esta función traduce cualquiera de esas formas al entero 100.
-    Regresa None si el valor no se puede traducir (ej. "abc", "12.5", "").
+    Convierte un identificador recibido como texto ("100", " 100 ", "100.0", "0100") a entero.
+    Regresa None si no representa un entero ("abc", "12.5", "").
     """
     if valor is None:
         return None
@@ -123,10 +118,8 @@ def traducir_llave(valor):
 
 def vaciar_carpeta(carpeta):
     """
-    Borra una carpeta y su contenido. En Windows con OneDrive a veces sale
-    'PermissionError: Acceso denegado' porque OneDrive tiene la carpeta "agarrada"
-    mientras sincroniza. Por eso: se reintenta 3 veces y, si aun así no se deja,
-    se borran los archivos uno por uno y las carpetas que no se dejen se quedan vacías.
+    Borra una carpeta y su contenido. Reintenta ante PermissionError (carpetas bloqueadas
+    por sincronización en Windows) y, como último recurso, elimina archivo por archivo.
     """
     import shutil
     import time

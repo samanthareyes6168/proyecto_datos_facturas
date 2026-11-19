@@ -1,12 +1,10 @@
-# config.py
-# Configuración central del pipeline. Todas las rutas y parámetros viven aquí
-# para que ningún script tenga valores "escondidos".
+"""Configuración central del pipeline: versiones, rutas y parámetros."""
 
 from pathlib import Path
 
 # ---------------- Versión (versionado semántico MAJOR.MINOR.PATCH) ----------------
 VERSION_PIPELINE = "1.0.0"
-VERSION_ESQUEMA = "1.0.0"   # cambia MAJOR si se rompe el esquema (se borra/renombra una columna)
+VERSION_ESQUEMA = "1.0.0"   
 
 # ---------------- Rutas ----------------
 RAIZ = Path(__file__).resolve().parent
@@ -27,7 +25,7 @@ DOCS_DIR = RAIZ / "docs"
 SEMILLA = 42
 FECHA_INICIO_HISTORIA = "2026-08-03"
 FECHA_FIN_HISTORIA = "2026-11-13"     # último cierre nocturno ya ocurrido
-PORCENTAJE_CAOS = 0.07                # 7 % de registros corruptos (el reto pide mínimo 5 %)
+PORCENTAJE_CAOS = 0.07                # proporción de registros corruptos generados
 
 # ---------------- Reglas de negocio ----------------
 EDAD_MINIMA = 18
@@ -38,7 +36,7 @@ METODOS_PAGO = {"tarjeta", "efectivo", "transferencia"}
 PATRON_RFC = r"^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$"
 
 # ---------------- Stream ----------------
-WATERMARK_TOLERANCIA_SEG = 120   # esperamos hasta 2 minutos a un evento retrasado
+WATERMARK_TOLERANCIA_SEG = 120   # tolerancia para eventos retrasados
 VENTANA_SEG = 60                 # ventanas de 1 minuto (tumbling windows)
 
 # ---------------- Orquestación ----------------

@@ -1,6 +1,6 @@
 # Catálogo de datos
 
-_Generado automáticamente por `pipeline/p7_catalogo.py` el 2026-11-14 18:01. Versión de esquema 1.0.0._
+_Generado automáticamente por `pipeline/p7_catalogo.py` el 2026-11-19 10:08. Versión de esquema 1.0.0._
 
 El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaje de negocio; la **operativa** documenta tipos, calidad, sensibilidad y quién puede acceder.
 
@@ -150,7 +150,7 @@ El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaj
 ### dim_cliente
 | Atributo | Valor |
 |---|---|
-| Filas | 432 |
+| Filas | 431 |
 | Sensibilidad | Confidencial (datos personales: nombre, RFC, edad) |
 | Acceso | ingeniero, auditor |
 | Actualización | Diaria (batch 02:00) |
@@ -200,7 +200,7 @@ El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaj
 ### facturas
 | Atributo | Valor |
 |---|---|
-| Filas | 4,451 |
+| Filas | 4,443 |
 | Sensibilidad | Confidencial (fiscal) |
 | Acceso | ingeniero, auditor |
 | Actualización | Diaria |
@@ -218,7 +218,7 @@ El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaj
 ### detalle_factura
 | Atributo | Valor |
 |---|---|
-| Filas | 9,040 |
+| Filas | 9,030 |
 | Sensibilidad | Confidencial (fiscal) |
 | Acceso | ingeniero, auditor |
 | Actualización | Diaria |
@@ -237,7 +237,7 @@ El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaj
 ### pagos
 | Atributo | Valor |
 |---|---|
-| Filas | 463 |
+| Filas | 457 |
 | Sensibilidad | Confidencial (financiera) |
 | Acceso | ingeniero, auditor |
 | Actualización | Continua (stream) |
@@ -256,7 +256,7 @@ El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaj
 ### hechos_ventas
 | Atributo | Valor |
 |---|---|
-| Filas | 9,040 |
+| Filas | 9,030 |
 | Sensibilidad | Interna (incluye nombre del cliente) |
 | Acceso | analista, ingeniero, auditor |
 | Actualización | Diaria |
@@ -303,7 +303,7 @@ El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaj
 ### mart_ventas_cliente
 | Atributo | Valor |
 |---|---|
-| Filas | 418 |
+| Filas | 417 |
 | Sensibilidad | Interna |
 | Acceso | analista, ingeniero |
 | Actualización | Diaria |
@@ -340,7 +340,7 @@ El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaj
 ### stream_cobranza_minuto
 | Atributo | Valor |
 |---|---|
-| Filas | 32 |
+| Filas | 30 |
 | Sensibilidad | Interna |
 | Acceso | analista, ingeniero |
 | Actualización | Continua |
@@ -358,7 +358,7 @@ El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaj
 ### dlq
 | Atributo | Valor |
 |---|---|
-| Filas | 428 |
+| Filas | 408 |
 | Sensibilidad | Confidencial (contiene datos crudos) |
 | Acceso | ingeniero, auditor |
 | Actualización | Cada corrida |
@@ -371,7 +371,7 @@ El catálogo tiene dos vistas: la **de referencia** explica los datos en lenguaj
 | lote | TEXT |  | 0.0 |
 | fuente | TEXT |  | 0.0 |
 | entidad | TEXT |  | 0.0 |
-| llave | TEXT |  | 0.7 |
+| llave | TEXT |  | 0.49 |
 | capa | TEXT |  | 0.0 |
 | motivos | TEXT |  | 0.0 |
 | registro_original | TEXT |  | 0.0 |

@@ -1,13 +1,12 @@
-# p3_validacion.py
-# PASO 3: Escudo de validación en DOBLE CAPA + Dead Letter Queue (DLQ).
-#
-#   Capa 1 - ESQUEMA: ¿el dato tiene el TIPO correcto?  (¿cantidad es entero? ¿fecha es fecha?)
-#   Capa 2 - NEGOCIO: ¿el dato tiene SENTIDO?           (¿cantidad > 0? ¿edad >= 18? ¿el cliente existe?)
-#
-# Un registro que falla cualquier capa se manda a la tabla `dlq` con el motivo y el registro
-# original, y el pipeline SIGUE con los demás. Los válidos pasan a tablas stg_* (staging).
-#
-# Uso:  python -m pipeline.p3_validacion
+"""
+Validación en dos capas y Dead Letter Queue.
+
+  1. Esquema: tipo y obligatoriedad de cada campo.
+  2. Negocio: rangos, fechas, unicidad e integridad referencial.
+
+Los registros válidos pasan a stg_*; los rechazados se registran en la tabla dlq
+con su capa, motivos y registro original.
+"""
 
 import json
 import re

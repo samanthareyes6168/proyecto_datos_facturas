@@ -6,4 +6,3 @@ logs/
 venv/
 app_gestor_facturas/facturas.db
 app_gestor_facturas/bitacora.txt
-GUIA_PASO_A_PASO.md

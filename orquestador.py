@@ -1,21 +1,12 @@
-# orquestador.py
-# FASE 4: Script maestro con un DAG (grafo de tareas con dependencias).
-#
-#   - Respeta DEPENDENCIAS: una tarea solo corre cuando terminaron todas las que necesita.
-#   - PRIORIZA POR COSTO: si varias tareas están listas, primero corre las baratas.
-#     Las tareas de costo "alto" (benchmark) solo corren en la ventana nocturna o con --incluir-costosas.
-#   - RETRY con backoff exponencial: ante fallos TEMPORALES (red, base bloqueada) reintenta
-#     esperando 2s, 4s, 8s. Los errores de lógica NO se reintentan (fallar rápido).
-#   - Si una tarea falla definitivamente, sus dependientes se saltan, pero las demás siguen.
-#
-# Horario: el batch corre todos los días a las 02:00 (ver .github/workflows/pipeline_nocturno.yml).
-#
-# Uso:
-#   python orquestador.py                       -> corre todo el DAG
-#   python orquestador.py --simular-falla-red   -> los 2 primeros intentos de conexión fallan (demo Retry)
-#   python orquestador.py --incluir-costosas    -> también corre el benchmark Parquet vs CSV
-#   python orquestador.py --solo-stream         -> solo la vía de tiempo real
-#   python orquestador.py --ver-dag             -> imprime el DAG y sale
+"""
+Orquestador del pipeline.
+
+Ejecuta las tareas como un DAG: respeta dependencias, prioriza por costo de cómputo
+y reintenta fallos temporales con backoff exponencial. Si una tarea falla, se omiten
+solo sus dependientes. El batch se programa a las 02:00 (.github/workflows/pipeline_nocturno.yml).
+
+Opciones: --ver-dag, --incluir-costosas, --solo-stream, --simular-falla-red
+"""
 
 import argparse
 import os
@@ -34,7 +25,7 @@ ORDEN_COSTO = {"bajo": 0, "medio": 1, "alto": 2}
 
 
 def es_temporal(error):
-    """Solo vale la pena reintentar fallos pasajeros. Un 'no such column' NO se arregla esperando."""
+    """Indica si un error es temporal y amerita reintento."""
     if isinstance(error, (ConnectionError, TimeoutError)):
         return True
     return isinstance(error, sqlite3.OperationalError) and "locked" in str(error).lower()

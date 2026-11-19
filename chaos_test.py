@@ -1,17 +1,12 @@
-# chaos_test.py
-# DEMO "CHAOS TEST" (para el video de 5 minutos).
-#
-# 1) Toma una foto del estado actual (facturas, DLQ, filas en Parquet).
-# 2) INYECTA EN VIVO un lote nuevo lleno de basura + eventos de stream retrasados y corruptos:
-#      edades negativas, edad en texto, menor de edad, RFC inválido, cantidad "dos", cantidad negativa,
-#      precio "abc", precio nulo, fecha futura, cliente inexistente, folio duplicado, factura vacía,
-#      celda de productos mal formada, pagos con monto negativo, JSON roto y eventos fuera de watermark.
-# 3) Corre el orquestador completo (con falla de red simulada para que se vea el Retry).
-# 4) Muestra que el pipeline NO se detuvo: lo bueno entró, lo malo está en la DLQ con su motivo,
-#    los faltantes se imputaron y la capa Parquet se actualizó.
-#
-# Uso:  python chaos_test.py            (con falla de red simulada)
-#       python chaos_test.py --sin-falla
+"""
+Chaos Test.
+
+Inyecta un lote con registros anómalos y eventos de stream retrasados o corruptos,
+ejecuta el orquestador y reporta: tareas completadas, registros enviados a la DLQ,
+valores imputados y filas en la capa Parquet antes y después.
+
+Opciones: --sin-falla
+"""
 
 import argparse
 import csv

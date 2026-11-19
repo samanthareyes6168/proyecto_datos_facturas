@@ -1,17 +1,12 @@
-# exportar_desde_app.py
-# PUENTE entre el proyecto de Programación (Gestor de Facturas) y el pipeline de Ingeniería de Datos.
-#
-# Lee la base facturas.db que crea la app (app_gestor_facturas/) y genera el archivo de cierre
-# nocturno facturas.json en el formato que espera el pipeline.
-#
-# La app guarda el cliente y el producto como TEXTO LIBRE (lo que se escribió en la ventana).
-# Aquí se busca su id en el catálogo de la base relacional (sin importar mayúsculas ni acentos).
-# Si no se encuentra, se deja el texto tal cual: el pipeline lo rechazará y lo mandará a la DLQ,
-# que es justo lo que debe pasar con un cliente mal escrito.
-#
-# Uso (desde la raíz del proyecto):
-#   python puente_app/exportar_desde_app.py --app-db app_gestor_facturas/facturas.db --fecha 2026-11-14
-#   python orquestador.py
+"""
+Exportación de facturas del Gestor de Facturas al formato de lote del pipeline.
+
+Lee facturas.db de la app, resuelve cliente y producto contra el catálogo relacional
+(sin distinguir mayúsculas ni acentos) y escribe data/entrada/batch/<fecha>_app/facturas.json.
+Los nombres no encontrados se conservan como texto y son rechazados en la validación.
+
+Ejecución: python puente_app/exportar_desde_app.py --app-db <ruta facturas.db> [--fecha AAAA-MM-DD]
+"""
 
 import argparse
 import json
@@ -50,7 +45,7 @@ def exportar(ruta_app_db, fecha):
             detalle.append({"id_producto": id_producto if id_producto is not None else producto,
                             "cantidad": cantidad, "precio_unitario": precio})
         facturas.append({"folio": folio, "fecha": fecha_f,
-                         # El id viaja como TEXTO, igual que lo captura un QLineEdit (reto del join roto)
+                         # El id se exporta como texto, igual que lo captura la interfaz
                          "id_cliente": str(id_cliente) if id_cliente is not None else cliente,
                          "id_usuario": id_usuario, "detalle": detalle})
     app.close()

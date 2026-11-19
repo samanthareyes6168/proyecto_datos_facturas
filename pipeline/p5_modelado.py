@@ -1,19 +1,10 @@
-# p5_modelado.py
-# PASO 5: Transformación dentro del almacén (la "T" del ELT).
-#
-#   a) Demostración del JOIN ROTO: id_cliente texto ("100", " 100 ", "100.0") vs entero 100.
-#   b) Modelo normalizado en 3FN (capa "core"):
-#        dim_ciudad      (id_ciudad, ciudad, estado)            <- quita la dependencia transitiva ciudad -> estado
-#        dim_cliente     (id_cliente, nombre, rfc, edad, id_ciudad, ...)
-#        dim_producto    (id_producto, nombre, categoria, precio_lista)
-#        dim_usuario     (id_usuario, usuario)                  <- SIN contraseña (gobernanza)
-#        facturas        (folio, fecha, id_cliente, id_usuario, origen, lote)   <- SIN total (es derivado)
-#        detalle_factura (folio, linea, id_producto, cantidad, precio_unitario, ...)
-#        pagos           (id_evento, folio, monto, metodo, event_time, ...)
-#   c) Capa de consumo (reportes finales / "marts"):
-#        hechos_ventas, mart_ventas_mensuales, mart_ventas_cliente, mart_ventas_producto
-#
-# Uso:  python -m pipeline.p5_modelado
+"""
+Transformación en el almacén: modelo 3FN y capa de consumo.
+
+  - Traducción de llaves id_cliente (texto -> entero) y registro de la comparación de joins.
+  - Core 3FN: dim_ciudad, dim_cliente, dim_producto, dim_usuario, facturas, detalle_factura, pagos.
+  - Consumo: hechos_ventas, mart_ventas_mensuales, mart_ventas_cliente, mart_ventas_producto.
+"""
 
 import pandas as pd
 
@@ -90,7 +81,7 @@ SELECT folio, ROUND(SUM(cantidad * precio_unitario), 2) AS total FROM detalle_fa
 
 
 def demostrar_join_roto(con):
-    """Muestra el problema y la solución. Se imprime en el log (útil para el video)."""
+    """Compara tres estrategias de join sobre id_cliente y registra el resultado en el log."""
     facturas = pd.read_sql("SELECT folio, id_cliente_original FROM stg_facturas", con)
     clientes = pd.read_sql("SELECT id_cliente, nombre FROM int_clientes", con)
     clientes["id_cliente"] = clientes["id_cliente"].astype("int64")

@@ -1,22 +1,13 @@
-# p2_ingesta_stream.py
-# PASO 2: Ingesta STREAM (micro-batch) de pagos en tiempo real con WATERMARKING.
-#
-# Problema: por fallos de red, los eventos NO llegan en el orden en que ocurrieron.
-# Solución: ventanas de 1 minuto según la hora del EVENTO (event_time) y un watermark:
-#
-#     watermark = (event_time más reciente que hemos visto) - tolerancia (2 minutos)
-#
-#   - Si llega un evento con event_time >= watermark  -> se acepta y actualiza su ventana,
-#     aunque haya llegado tarde (retraso tolerable).
-#   - Si llega un evento con event_time <  watermark  -> su ventana ya se CERRÓ: va a la DLQ
-#     con capa 'watermark' para auditarlo (no se pierde, pero no altera reportes cerrados).
-#   - Una ventana se marca 'cerrada' cuando su fin queda por debajo del watermark.
-#
-# El consumidor recuerda hasta qué línea leyó (control_stream.offset_lineas), así que si se
-# agregan eventos nuevos al archivo, la siguiente corrida solo procesa los nuevos.
-#
-# Uso:  python -m pipeline.p2_ingesta_stream            (rápido)
-#       python -m pipeline.p2_ingesta_stream --en-vivo  (imprime cada evento, para la demo)
+"""
+Ingesta stream (micro-batch) de pagos con watermarking.
+
+Los pagos se agregan en ventanas de VENTANA_SEG según su event_time.
+watermark = event_time máximo observado - WATERMARK_TOLERANCIA_SEG.
+Un evento anterior al watermark se envía a la DLQ (capa 'watermark').
+El avance de lectura se guarda en control_stream para procesar solo eventos nuevos.
+
+Ejecución: python -m pipeline.p2_ingesta_stream [--en-vivo]
+"""
 
 import argparse
 import json

@@ -1,11 +1,11 @@
-# p7_catalogo.py
-# PASO 7: Gobernanza. Genera el mini CATÁLOGO DE DATOS con dos vistas:
-#   - Vista de REFERENCIA (negocio): qué significa cada tabla/columna, para quién sirve.
-#   - Vista OPERATIVA (técnica): tipo, filas, % de nulos, dueño, sensibilidad, quién tiene acceso,
-#     frecuencia de actualización. Los datos técnicos se leen del almacén en cada corrida.
-#
-# Salida: docs/04_catalogo_datos.md y data/catalogo.json
-# Uso:  python -m pipeline.p7_catalogo
+"""
+Catálogo de datos.
+
+Genera la vista de referencia (significado de negocio) y la vista operativa
+(tipos, filas, % de nulos, sensibilidad, accesos y frecuencia).
+
+Salidas: docs/04_catalogo_datos.md, data/catalogo.json
+"""
 
 import json
 from datetime import datetime
