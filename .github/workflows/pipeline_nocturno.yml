@@ -1,13 +1,11 @@
-# Ejecución programada del pipeline (vía Batch) con GitHub Actions.
-# El "servidor" (runner) solo existe mientras corre el job (~1-2 minutos) y luego se destruye:
-# ese es el argumento FinOps de apagar recursos frente a un servidor encendido 24/7.
+# Ejecución programada de la vía batch. El runner existe solo durante el job y luego se libera.
 
 name: Pipeline nocturno de facturas
 
 on:
   schedule:
     - cron: "0 8 * * *"        # 08:00 UTC = 02:00 hora del centro de México (cierre nocturno)
-  workflow_dispatch:            # botón para correrlo a mano (útil en la demo)
+  workflow_dispatch:            # ejecución manual
 
 jobs:
   pipeline:
